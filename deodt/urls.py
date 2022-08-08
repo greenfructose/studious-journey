@@ -22,4 +22,5 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('vlog/', include('vlog.urls')),
     path('podcast/', include('podcast.urls')),
+    path('member/', include('member.urls')),
 ]

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block container %}
+<main class="container">
+  <article class="grid">
+    <div>
+      <hgroup>
+        <h1>Register</h1>
+      </hgroup>
+      <form method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </article>
+</main>
+{% endblock %}
