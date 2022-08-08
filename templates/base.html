@@ -1,0 +1,35 @@
+{% load i18n %}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static "css/pico/pico.min.css" %}">
+  <title>Do Everything or Die Trying</title>
+  {% block header %}
+  {% endblock %}
+</head>
+<body>
+<div class="hero">
+  <nav class="container-fluid">
+    <ul>
+      <li><strong>DEODT</strong></li>
+    </ul>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/vlog">Vlog</a></li>
+      <li><a href="/podcast">Podcast</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/login" role="button">Login</a></li>
+    </ul>
+  </nav>
+</div>
+  {% block container %}
+  {% endblock %}
+  <footer class="container">
+    <small>Built with <a href="https://picocss.com">Pico</a> • <a href="https://github.com/picocss/examples/tree/master/company/">Source code</a></small>
+  </footer><!-- ./ Footer -->
+</body>
+</html>
