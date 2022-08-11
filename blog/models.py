@@ -2,6 +2,13 @@ from django.db import models
 from tinymce.models import HTMLField
 from crum import get_current_user
 
+class Tag(models.Model):
+	name = models.CharField(max_length=15)
+	slug = models.SlugField()
+    
+	def __str__(self):
+		return self.name
+
 class Article(models.Model):
   author = models.ForeignKey(
     'auth.User', 
@@ -12,6 +19,7 @@ class Article(models.Model):
   slug = models.SlugField(max_length=200)
   image = models.ImageField(upload_to='images/')
   content = HTMLField()
+  tags = models.ManyToManyField(Tag)
 
   def __str__(self):
     return self.title

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block container %}
+<div class="container">
+  <article>
+    <header>
+      <h1>{{ article.title }}</h1>
+      <small>{{ article.author }} | </small>
+      <small>{{ article.date_published }}</small>
+    </header>
+    <img src="{{ article.image.url }}" alt="{{ article.title}}">
+    <p>{{ article.content|safe}}</p>
+    <a role="button" class="outline" href="{{ request.META.HTTP_REFERER }}">Go Back</a>
+  </article>
+</div>
+{% endblock %}

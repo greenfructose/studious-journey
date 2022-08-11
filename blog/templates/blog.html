@@ -4,25 +4,80 @@
 <header class="container">
   <hgroup>
     <h1>Blog</h1>
-    <h2>Check out my latest blog posts</h2>
+    <h2>Check out my blog posts</h2>
   </hgroup>
   <p><a href="#" role="button" onclick="event.preventDefault()">Subscribe to Newsletter</a></p>
 </header>
-<!-- Main -->
-<main class="container">
+<div class="container">
+  <details>
+    <summary role="button">Latest Post</summary>
+      <article>
+        <header>
+          <h1>{{ most_recent.title }}</h1>
+          <small>{{ most_recent.author }} | </small>
+          <small>{{ most_recent.date_published }}</small>
+        </header>
+        <img src="{{ most_recent.image.url }}" alt="{{ most_recent.title}}">
+        <p>{{ most_recent.content|safe|truncatewords:25 }}</p>
+        <a role="button" class="outline" href="{{ most_recent.id }}">View Post</a>
+      </article>
+  </details>
+</div>
+<div class="container">
+  <details>
+    <summary role="button">Featured Posts</summary>
+      {% for article in featured %}
 
-    {% for article in articles %}
+      <article>
+        <header>
+          <h1>{{ article.title }}</h1>
+          <small>{{ article.author }} | </small>
+          <small>{{ article.date_published }}</small>
+        </header>
+        <img src="{{ article.image.url }}" alt="{{ article.title}}">
+        <p>{{ article.content|safe|truncatewords:25 }}</p>
+        <a role="button" class="outline" href="{{ article.id }}">View Post</a>
+      </article>
+      
+      {% endfor %}
+  </details>
+</div>
+<div class="container">
+  <details open>
+    <summary role="button">All Posts</summary>
+      {% for article in articles %}
 
-    <article>
-      <header><h1>{{ article.title }}</h1></header>
-      <img src="{{ article.image.url }}" alt="{{ article.title}}">
-      <small>Published: {{ article.date_published }}</small>
-      <small>By: {{ article.author }}</small>
-      <p>{{ article.content|safe|truncatewords:25 }}</p>
-      <button role="button">View Post</button>
-    </article>
-    
-    {% endfor %}
-</main>
-<!-- ./ Main -->
+      <article>
+        <header>
+          <h1>{{ article.title }}</h1>
+          <small>{{ article.author }} | </small>
+          <small>{{ article.date_published }}</small>
+        </header>
+        <img src="{{ article.image.url }}" alt="{{ article.title}}">
+        <p>{{ article.content|safe|truncatewords:25 }}</p>
+        <a role="button" class="outline" href="{{ article.id }}">View Post</a>
+      </article>
+      
+      {% endfor %}
+      <div class="container">
+        <article>
+          <div class="grid">
+            {% if articles.has_previous %}
+            <a href="?page=1" role="button" class="secondary outline">&laquo; first</a>
+            <a href="?page={{ articles.previous_page_number }}" role="button" class="secondary outline">&laquo; previous</a>
+            {% endif %}
+      
+            <a role="button" class="secondary outline">
+              Page {{ articles.number }} of {{ articles.paginator.num_pages }}
+            </a>
+      
+            {% if articles.has_next %}
+            <a href="?page={{ articles.next_page_number }}" role="button" class="secondary outline">next &raquo;</a>
+            <a href="?page={{ articles.paginator.num_pages }}" role="button" class="secondary outline">last &raquo;</a>
+            {% endif %}
+          </div>
+        </article>
+      </div>
+  </details>
+</div>
 {% endblock %}
