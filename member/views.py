@@ -1,12 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DetailView
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from member.forms import NewUserForm
+from member.models import Profile
 
 class IndexView(TemplateView):
   template_name = 'member.html'
@@ -54,3 +55,13 @@ class LogOutView(TemplateView):
   def get(self, request, *args, **kwargs):
     logout(request)
     return HttpResponseRedirect('/')
+
+class UserProfileView(DetailView):
+  model = Profile
+  slug_field = 'user.username'
+  slug_url_kwarg = 'user'
+  template_name = 'profile_view.html'
+
+  def get_object(self):
+    object = Profile.objects.get(user=self.kwargs.get('user'))
+    return object

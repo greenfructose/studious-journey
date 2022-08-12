@@ -24,7 +24,7 @@
       <li><a href="/blog">Blog</a></li>
       {% if user.is_authenticated %}
       <li><a href="/member/logout" role="button">Logout</a></li>
-      <li><a href="/member" role="button">{{ user.username|title }}</a></li>
+      <li><a href="/member/{{ user.username }}" role="button">{{ user.username|title }}</a></li>
       {% else %}
       <li><a href="/member/login" role="button">Login</a></li>
       <li><a href="/member/register" role="button">Register</a></li>
