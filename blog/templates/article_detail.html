@@ -11,6 +11,12 @@
     <img src="{{ article.image.url }}" alt="{{ article.title}}">
     <p>{{ article.content|safe}}</p>
     <a role="button" class="outline" href="{{ request.META.HTTP_REFERER }}">Go Back</a>
+    <footer>
+      <h3>Tags</h3>
+      {% for tag in article.tags.all %}
+      <a href="/blog/{{ tag.slug }}">{{ tag.name }}{% if not forloop.last %},{% endif %}</a>
+      {% endfor %}
+    </footer>
   </article>
 </div>
 {% endblock %}
