@@ -58,10 +58,9 @@ class LogOutView(TemplateView):
 
 class UserProfileView(DetailView):
   model = Profile
-  slug_field = 'user.username'
-  slug_url_kwarg = 'user'
   template_name = 'profile_view.html'
 
-  def get_object(self):
-    object = Profile.objects.get(user=self.kwargs.get('user'))
-    return object
+  def get_object(self, queryset=None):
+    return Profile.objects.get(user__username=self.kwargs.get('username'))
+  
+

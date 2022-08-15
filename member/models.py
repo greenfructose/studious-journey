@@ -24,6 +24,8 @@ class Profile(models.Model):
     choices=MembershipLevel.choices,
     default=MembershipLevel.FREE,
     )
+  image = models.ImageField(default='images/profile_images/profile.png', upload_to='images/profile_images')
+  bio = models.TextField(default='', max_length=250)
 
   @receiver(post_save, sender=User)
   def create_user_profile(sender, instance, created, **kwargs):
